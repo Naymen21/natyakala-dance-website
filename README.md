@@ -2,6 +2,8 @@
 
 Concept website for **Natyakala Dance School** — an Indian classical dance school in Minneapolis (Bharatanatyam, Mohiniyattam, Kathakali) directed by Sona Nair.
 
+**Live:** https://natyakala-dance-website.vercel.app
+
 ## View it
 
 Open `index.html` directly in a browser, or serve the folder:
@@ -10,6 +12,33 @@ Open `index.html` directly in a browser, or serve the folder:
 python -m http.server 8000
 # then open http://localhost:8000
 ```
+
+## Deploying
+
+This repo is the **single source of truth** for the live site. Vercel is connected
+to it and deploys `main` to production automatically — push and it goes live in
+seconds. There is no build step: the tree is one static `index.html`.
+
+```bash
+git push origin main    # that's the whole deploy process
+```
+
+Check a deploy landed:
+
+```bash
+gh api repos/Naymen21/natyakala-dance-website/commits/main/status --jq .state
+```
+
+⚠️ **Commit email matters.** Vercel refuses to build a commit whose author email
+doesn't resolve to a GitHub account, failing with *"Deployment was blocked"* — the
+site silently stays on the previous version. Commit as:
+
+```
+Naymen21 <100360630+Naymen21@users.noreply.github.com>
+```
+
+This is set globally, so it should just work; if a deploy is ever blocked, check
+`git log -1 --format='%ae'` first.
 
 ## What's here
 
