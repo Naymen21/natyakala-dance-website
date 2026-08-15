@@ -60,7 +60,6 @@ The site is a single file on purpose: it's a shareable concept demo. Every image
 - Full photo gallery (103 photos) with masonry layout + lightbox
 - "Stages we've graced" marquee (Flower TV, Minnesota Malayalee Association, KHMN, Indian Association of Minnesota)
 - Trial-class request form with client-side anti-spam (honeypot, time gate, per-device cooldown)
-- Google Maps location section
 - Responsive down to phones; respects `prefers-reduced-motion`
 
 ## Before going live (production TODO)
@@ -71,8 +70,9 @@ This is a **demo**. For the real site:
 2. **Wire the trial form to a real backend** (e.g. a small API route + email/SMS via Resend/Twilio) with server-side rate limiting and an admin toggle so Sona can pause notifications. Client-side anti-spam alone is bypassable.
 3. **Replace the three adult dancer cutouts** — they came from a reference image and should be Natyakala's own photos.
 4. **Add a real director photo** (current portrait slot is a placeholder; the "Profile1" file is a text bio, not a headshot).
-5. **Embed a live Google Maps iframe** (demo shows a styled placeholder panel).
-6. Add the hero **video montage** in place of the video slot.
+5. Add the hero **video montage** in place of the video slot.
+6. **Decide how visitors find the studio.** The address/map section was cut; if the real
+   site needs one, it has to come back with a live map rather than the placeholder panel.
 
 ## Notes
 
