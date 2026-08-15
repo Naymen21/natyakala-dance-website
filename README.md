@@ -46,12 +46,13 @@ This is set globally, so it should just work; if a deploy is ever blocked, check
 |------|------|
 | `index.html` | The entire site — self-contained (all CSS, JS, and images embedded). |
 | `assets/` | Original source images (dancer cutouts + the hero composite) kept for future edits. |
+| `assets/logo/` | The Nataraja mark in three cuts — whole, ring only, dancer only — cropped to the artwork and downscaled to 1024px. Re-encode from these if the logo ever needs resizing. |
 
 The site is a single file on purpose: it's a shareable concept demo. Every image is embedded as a data URI so it works with no server and no external requests.
 
 ## Features
 
-- Nataraja intro/loading animation, then a stage-curtain reveal
+- Nataraja intro/loading animation — the flame ring turns around a still dancer — then a stage-curtain reveal
 - Custom lagging cursor (desktop)
 - Layered parallax hero with the three-dancer composite
 - Light / dark theme toggle (persists via `localStorage`)
