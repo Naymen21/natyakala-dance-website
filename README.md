@@ -97,7 +97,7 @@ This is a **demo**. For the real site:
 
 1. **Wire the trial form to a real backend** (e.g. a small API route + email/SMS via Resend/Twilio) with server-side rate limiting and an admin toggle so Sona can pause notifications. Client-side anti-spam alone is bypassable.
 2. **Replace the three adult dancer cutouts** — they came from a reference image and should be Natyakala's own photos.
-3. **Add a real director photo** (current portrait slot is a placeholder; the "Profile1" file is a text bio, not a headshot).
+3. **Reshoot the director portrait.** The current one is cropped from a phone screenshot and is only 472x590 -- it renders soft on high-DPI screens, where the 520px slot wants ~1040px. Swap `--portrait-img` for a full-resolution original when one exists.
 4. Add the hero **video montage** in place of the video slot.
 5. **Decide how visitors find the studio.** The address/map section was cut; if the real
    site needs one, it has to come back with a live map rather than the placeholder panel.
