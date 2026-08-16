@@ -44,11 +44,40 @@ This is set globally, so it should just work; if a deploy is ever blocked, check
 
 | Path | What |
 |------|------|
-| `index.html` | The entire site — self-contained (all CSS, JS, and images embedded). |
+| `index.html` | The whole site: all CSS, all JS, and the small fixed images (logo, favicon, hero composite, dance-form cutouts) embedded as data URIs. |
 | `assets/` | Original source images (dancer cutouts + the hero composite) kept for future edits. |
 | `assets/logo/` | The Nataraja mark in three cuts — whole, ring only, dancer only — cropped to the artwork and downscaled to 1024px. Re-encode from these if the logo ever needs resizing. |
 
-The site is a single file on purpose: it's a shareable concept demo. Every image is embedded as a data URI so it works with no server and no external requests.
+One file on purpose — it is a shareable concept demo. The *fixed* art is embedded
+so the chrome renders with no server; the *photo archive* is not, because it never
+could be (see below).
+
+## The photo gallery
+
+The 266 archive photographs live in a **public Supabase Storage bucket**, not in
+this file:
+
+```
+https://ezrzwjzyetpusijwditl.supabase.co/storage/v1/object/public/gallery/
+  manifest.json     list of {n: filename, w, h}
+  thumb/<name>.jpg  600px  — the masonry grid
+  full/<name>.jpg   1800px — the lightbox
+```
+
+On load the page fetches `manifest.json`, then builds URLs from it. **The bucket is
+public, so the page holds no Supabase key and makes no authenticated request** —
+these are plain HTTPS GETs. Nothing to leak, nothing to rotate.
+
+Why not embed them like everything else: 266 photos as base64 is ~350MB inline, and
+even the earlier 103-photo subset made `index.html` 5.5MB that every visitor
+downloaded in full before first paint. It is now 722KB and photos stream in lazily.
+
+**To add or remove photos:** re-run the derive/upload scripts against a source
+folder, or edit `manifest.json` in the bucket directly — dropping an entry there
+removes it from the site with no re-upload and no code change.
+
+If the manifest fetch fails the gallery shows a "could not be loaded" message
+rather than a silently empty grid.
 
 ## Features
 
@@ -57,7 +86,7 @@ The site is a single file on purpose: it's a shareable concept demo. Every image
 - Layered parallax hero with the three-dancer composite
 - Light / dark theme toggle (persists via `localStorage`)
 - Curriculum cards with cutout dancers overflowing the frames
-- Full photo gallery (103 photos) with masonry layout + lightbox
+- Full photo gallery (266 photos from Supabase) with masonry layout + lightbox
 - "Stages we've graced" marquee (Flower TV, Minnesota Malayalee Association, KHMN, Indian Association of Minnesota)
 - Trial-class request form with client-side anti-spam (honeypot, time gate, per-device cooldown)
 - Responsive down to phones; respects `prefers-reduced-motion`
@@ -66,15 +95,15 @@ The site is a single file on purpose: it's a shareable concept demo. Every image
 
 This is a **demo**. For the real site:
 
-1. **Serve images as files**, not embedded data URIs. The full album (~226 unique photos) is too large to embed; host them in an image folder / CDN and load responsively. Demo currently embeds 103 downscaled copies.
-2. **Wire the trial form to a real backend** (e.g. a small API route + email/SMS via Resend/Twilio) with server-side rate limiting and an admin toggle so Sona can pause notifications. Client-side anti-spam alone is bypassable.
-3. **Replace the three adult dancer cutouts** — they came from a reference image and should be Natyakala's own photos.
-4. **Add a real director photo** (current portrait slot is a placeholder; the "Profile1" file is a text bio, not a headshot).
-5. Add the hero **video montage** in place of the video slot.
-6. **Decide how visitors find the studio.** The address/map section was cut; if the real
+1. **Wire the trial form to a real backend** (e.g. a small API route + email/SMS via Resend/Twilio) with server-side rate limiting and an admin toggle so Sona can pause notifications. Client-side anti-spam alone is bypassable.
+2. **Replace the three adult dancer cutouts** — they came from a reference image and should be Natyakala's own photos.
+3. **Add a real director photo** (current portrait slot is a placeholder; the "Profile1" file is a text bio, not a headshot).
+4. Add the hero **video montage** in place of the video slot.
+5. **Decide how visitors find the studio.** The address/map section was cut; if the real
    site needs one, it has to come back with a live map rather than the placeholder panel.
 
 ## Notes
 
 - Rebuilding as a proper **Next.js** project is the recommended path for the above (form backend, image hosting, real map/video).
-- Album source photos are **not** committed here (too large for git).
+- Album source photos are **not** committed here (269MB). They live in Supabase; the
+  originals stay on Sona's drive.
