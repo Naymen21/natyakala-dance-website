@@ -365,7 +365,10 @@
   .btn:hover{transform:translateY(-2px);}
   .btn.solid{background:var(--bronze-bright);color:var(--ink);}
   .btn.solid:hover{background:var(--ivory);}
-  .btn.ghost{border:1px solid var(--line);color:var(--ivory);}
+  /* background:none matters for <button> only: a bare button renders with the UA's
+     opaque buttonface fill, which turned the near-white ghost label invisible.
+     Anchors were already transparent, so this changes nothing for them. */
+  .btn.ghost{background:none;border:1px solid var(--line);color:var(--ivory);}
   .btn.ghost:hover{border-color:var(--bronze-bright);}
   .btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--bronze-bright);outline-offset:3px;}
   .scroll-cue{
