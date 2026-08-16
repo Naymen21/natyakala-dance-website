@@ -87,7 +87,7 @@ rather than a silently empty grid.
 - Light / dark theme toggle (persists via `localStorage`)
 - Curriculum cards with cutout dancers overflowing the frames
 - Full photo gallery (266 photos from Supabase) with masonry layout + lightbox
-- "Stages we've graced" marquee — 12 venues; the CSS animation duration is tuned to the track width, so re-measure it if the list changes
+- "Stages we've graced" marquee — 9 venues; the CSS animation duration is tuned to the track width, so re-measure it if the list changes
 - Trial-class request form with client-side anti-spam (honeypot, time gate, per-device cooldown)
 - Responsive down to phones; respects `prefers-reduced-motion`
 
