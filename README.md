@@ -84,6 +84,7 @@ rather than a silently empty grid.
 - Nataraja intro/loading animation — the flame ring turns around a still dancer — then a stage-curtain reveal
 - Custom lagging cursor (desktop)
 - Layered parallax hero with the three-dancer composite
+- **Upcoming events** section — next date gets poster treatment with a countdown, later dates are compact cards. Edit `window.NK_EVENTS` near the top of `index.html`; past dates drop out on their own and an empty list shows a graceful fallback. Set `sample:false` to clear the "sample listings" badge.
 - Light / dark theme toggle (persists via `localStorage`)
 - Curriculum cards with cutout dancers overflowing the frames
 - Full photo gallery (266 photos from Supabase) with masonry layout + lightbox
